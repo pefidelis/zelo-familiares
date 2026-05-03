@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zelo — Encontre o profissional certo para seu familiar</title>
+  <meta name="description" content="A Zelo conecta familiares de pacientes pós-AVC com fisioterapeutas, fonoaudiólogos e cuidadores em Anápolis e região. Gratuito para familiares." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal-50:  #E1F5EE;
+      --teal-100: #C3EBD8;
+      --teal-400: #1D9E75;
+      --teal-600: #0F6E56;
+      --teal-800: #085041;
+      --gray-50:  #F7F6F3;
+      --gray-100: #ECEAE4;
+      --gray-200: #D3D1C7;
+      --gray-400: #888780;
+      --gray-600: #5F5E5A;
+      --gray-900: #1C1C1A;
+      --white:    #FFFFFF;
+      --urgency:  #C0392B;
+      --urgency-bg: #FDF0EF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      line-height: 1.6;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(247,246,243,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--teal-600);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-cta {
+      background: var(--teal-600);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 9px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--teal-800); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      padding: 100px 24px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: fixed;
+      top: 0; right: -20%;
+      width: 60vw; height: 60vh;
+      background: radial-gradient(ellipse at center, rgba(29,158,117,0.10) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .urgency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--urgency-bg);
+      border: 1px solid rgba(192,57,43,0.25);
+      color: var(--urgency);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      line-height: 1.4;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(38px, 8vw, 58px);
+      line-height: 1.1;
+      color: var(--gray-900);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--teal-600);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--gray-600);
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--teal-600);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 16px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-bottom: 20px;
+      width: 100%;
+      text-align: center;
+    }
+    .btn-primary:hover { background: var(--teal-800); transform: translateY(-1px); }
+
+    .hero-stat {
+      font-size: 13px;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+
+    .hero-stat strong { color: var(--gray-600); font-weight: 500; }
+
+    /* ── SEÇÕES GENÉRICAS ── */
+    section { padding: 72px 24px; }
+
+    .container { max-width: 680px; margin: 0 auto; }
+    .container-wide { max-width: 900px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal-400);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(26px, 5vw, 36px);
+      color: var(--gray-900);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      color: var(--gray-600);
+      line-height: 1.65;
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+
+    /* ── DOR — 3 CARDS ── */
+    .pain-section { background: var(--white); }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .pain-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .pain-card:hover {
+      border-color: var(--teal-100);
+      box-shadow: 0 4px 20px rgba(15,110,86,0.08);
+    }
+
+    .pain-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .pain-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+
+    .pain-card p {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── COMO FUNCIONA ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 40px;
+      position: relative;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding-bottom: 36px;
+      position: relative;
+    }
+
+    .step:last-child { padding-bottom: 0; }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 44px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--teal-100), transparent);
+    }
+
+    .step-num {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 50%;
+      background: var(--teal-600);
+      color: var(--white);
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      color: var(--gray-900);
+      margin-bottom: 6px;
+    }
+
+    .step-content p {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── ESPECIALIDADES ── */
+    .esp-section { background: var(--white); }
+
+    .esp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .esp-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: 12px;
+      padding: 18px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gray-900);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .esp-card:hover {
+      border-color: var(--teal-400);
+      background: var(--teal-50);
+    }
+
+    .esp-icon { font-size: 22px; flex-shrink: 0; }
+
+    /* ── STAT SECTION ── */
+    .stat-section {
+      background: var(--teal-800);
+      padding: 72px 24px;
+    }
+
+    .stat-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(42px, 10vw, 68px);
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .stat-number em { color: rgba(255,255,255,0.6); font-style: normal; font-size: 0.55em; display: block; margin-bottom: 4px; letter-spacing: 0; }
+
+    .stat-desc {
+      font-size: 16px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── FORMULÁRIO ── */
+    .form-section { background: var(--gray-50); }
+
+    #formulario {
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: 20px;
+      padding: 36px 28px;
+      margin-top: 36px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.04);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-600);
+      margin-bottom: 7px;
+      letter-spacing: 0.2px;
+    }
+
+    label .req { color: var(--urgency); margin-left: 2px; }
+
+    input, select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--gray-900);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--teal-400);
+      box-shadow: 0 0 0 3px rgba(29,158,117,0.12);
+    }
+
+    input::placeholder { color: var(--gray-400); }
+
+    .select-wrapper {
+      position: relative;
+    }
+
+    .select-wrapper::after {
+      content: '↓';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    #btn-enviar {
+      width: 100%;
+      background: var(--teal-600);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      padding: 17px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    #btn-enviar:hover:not(:disabled) {
+      background: var(--teal-800);
+      transform: translateY(-1px);
+    }
+
+    #btn-enviar:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .form-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin-top: 14px;
+      justify-content: center;
+    }
+
+    .form-trust span {
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    .form-trust span::before {
+      content: '✓ ';
+      color: var(--teal-400);
+      font-weight: 600;
+    }
+
+    /* ── RODAPÉ ── */
+    footer {
+      background: var(--gray-900);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .footer-tag {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .footer-info {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── ANIMAÇÕES ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 600px) {
+      .pain-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .esp-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (min-width: 768px) {
+      .hero { padding: 120px 40px 80px; }
+      .btn-primary { width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Zelo</span>
+    <a href="#formulario" class="nav-cta">Quero ajuda gratuita →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section style="padding:0;">
+    <div class="hero">
+      <div class="urgency-badge reveal">
+        ⚠️ Cada semana sem reabilitação pode comprometer a recuperação permanentemente.
+      </div>
+
+      <h1 class="reveal reveal-delay-1">
+        Seu familiar saiu do hospital.<br>
+        <em>E agora?</em>
+      </h1>
+
+      <p class="hero-sub reveal reveal-delay-2">
+        A Zelo conecta você ao fisioterapeuta, fonoaudiólogo ou cuidador certo — em Anápolis e região — para que a recuperação comece de verdade.
+      </p>
+
+      <a href="#formulario" class="btn-primary reveal reveal-delay-3">
+        Quero encontrar um profissional agora →
+      </a>
+
+      <p class="hero-stat reveal reveal-delay-3">
+        <strong>7.624 internações por AVC em Goiás em 2023.</strong><br>
+        A maioria dos pacientes não começa a reabilitação no tempo certo.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROBLEMA -->
+  <section class="pain-section">
+    <div class="container">
+      <p class="section-label reveal">O que você está sentindo</p>
+      <h2 class="section-title reveal">Você provavelmente<br>está sentindo isso agora</h2>
+
+      <div class="pain-grid">
+        <div class="pain-card reveal">
+          <span class="pain-icon">🧭</span>
+          <h3>Não sei por onde começar</h3>
+          <p>O médico deu alta, mas não explicou quem contratar, o que fazer primeiro, nem em qual ordem.</p>
+        </div>
+        <div class="pain-card reveal reveal-delay-1">
+          <span class="pain-icon">⏰</span>
+          <h3>Sinto que o tempo está passando</h3>
+          <p>Você sabe que a reabilitação precisa começar logo, mas não consegue encontrar os profissionais certos rapidamente.</p>
+        </div>
+        <div class="pain-card reveal reveal-delay-2">
+          <span class="pain-icon">📱</span>
+          <h3>Indicação de amigo não é suficiente</h3>
+          <p>Você quer ver o profissional, a especialidade, o valor e a disponibilidade — antes de ligar para qualquer um.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section>
+    <div class="container">
+      <p class="section-label reveal">Como funciona</p>
+      <h2 class="section-title reveal">Simples assim</h2>
+
+      <div class="steps-grid">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Preencha o formulário abaixo</h3>
+            <p>Informe o que seu familiar precisa e sua cidade. Leva menos de 2 minutos.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Receba indicações da Zelo</h3>
+            <p>Entramos em contato com os profissionais mais adequados para o seu caso — sem burocracia.</p>
+          </div>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Inicie a recuperação</h3>
+            <p>Você faz o primeiro contato já sabendo quem é o profissional, o valor e a disponibilidade.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPECIALIDADES -->
+  <section class="esp-section">
+    <div class="container">
+      <p class="section-label reveal">Profissionais disponíveis</p>
+      <h2 class="section-title reveal">A Zelo encontra o profissional<br>certo para cada necessidade</h2>
+
+      <div class="esp-grid">
+        <div class="esp-card reveal">
+          <span class="esp-icon">🦿</span> Fisioterapeuta neurológico
+        </div>
+        <div class="esp-card reveal reveal-delay-1">
+          <span class="esp-icon">🗣️</span> Fonoaudiólogo
+        </div>
+        <div class="esp-card reveal reveal-delay-2">
+          <span class="esp-icon">🧠</span> Terapeuta Ocupacional
+        </div>
+        <div class="esp-card reveal">
+          <span class="esp-icon">👴</span> Cuidador de Idosos
+        </div>
+        <div class="esp-card reveal reveal-delay-1">
+          <span class="esp-icon">🧘</span> Psicólogo
+        </div>
+        <div class="esp-card reveal reveal-delay-2">
+          <span class="esp-icon">🥗</span> Nutricionista
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT -->
+  <section class="stat-section">
+    <div class="stat-inner">
+      <p class="stat-number reveal">
+        <em>registramos</em>
+        21 AVCs<br>por dia em Goiás
+      </p>
+      <p class="stat-desc reveal reveal-delay-1">
+        A reabilitação especializada está concentrada em poucos centros em Goiânia. Em Anápolis e região, a Zelo nasceu para resolver esse gap — conectando quem precisa com quem pode ajudar, sem burocracia.
+      </p>
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO -->
+  <section class="form-section" id="form-section">
+    <div class="container">
+      <p class="section-label reveal">É gratuito para familiares</p>
+      <h2 class="section-title reveal">Encontre o profissional certo<br>para seu familiar</h2>
+      <p class="section-desc reveal">Preencha abaixo. Nossa equipe entra em contato em até 24 horas.<br>É <strong>gratuito</strong> para familiares e pacientes.</p>
+
+      <form id="formulario" novalidate>
+        <div class="form-group">
+          <label for="nome">Seu nome <span class="req">*</span></label>
+          <input type="text" id="nome" placeholder="Ex: Maria da Silva" required />
+        </div>
+
+        <div class="form-group">
+          <label for="profissional">Que profissional você precisa? <span class="req">*</span></label>
+          <div class="select-wrapper">
+            <select id="profissional" required>
+              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="Fisioterapeuta">Fisioterapeuta</option>
+              <option value="Fonoaudiólogo">Fonoaudiólogo</option>
+              <option value="Terapeuta Ocupacional">Terapeuta Ocupacional</option>
+              <option value="Cuidador de Idosos">Cuidador de Idosos</option>
+              <option value="Psicólogo">Psicólogo</option>
+              <option value="Nutricionista">Nutricionista</option>
+              <option value="Não sei — preciso de orientação">Não sei — preciso de orientação</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="whatsapp">Seu WhatsApp <span class="req">*</span></label>
+          <input type="tel" id="whatsapp" placeholder="(62) 9 0000-0000" required />
+        </div>
+
+        <div class="form-group">
+          <label for="cidade">Cidade <span class="req">*</span></label>
+          <input type="text" id="cidade" placeholder="Ex: Anápolis, GO" required />
+        </div>
+
+        <div class="form-group">
+          <label for="condicao">Condição do familiar</label>
+          <div class="select-wrapper">
+            <select id="condicao">
+              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="Pós-AVC">Pós-AVC</option>
+              <option value="Pós-cirurgia">Pós-cirurgia</option>
+              <option value="Idoso com limitações">Idoso com limitações</option>
+              <option value="Outra condição">Outra condição</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="modalidade">Modalidade preferida</label>
+          <div class="select-wrapper">
+            <select id="modalidade">
+              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="Presencial">Presencial</option>
+              <option value="Domiciliar">Domiciliar (em casa)</option>
+              <option value="Tanto faz">Tanto faz</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" id="btn-enviar">Quero ser contactado pela Zelo →</button>
+
+        <div class="form-trust">
+          <span>Gratuito para familiares</span>
+          <span>Sem compromisso</span>
+          <span>Resposta em até 24h</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <p class="footer-logo">Zelo</p>
+    <p class="footer-tag">cuidado que conecta</p>
+    <p class="footer-info">Anápolis, Goiás · contato@zelo.com.br</p>
+  </footer>
+
+  <!-- INSTRUCOES OCULTAS -->
+  <div id="instrucoes" style="display:none">
+    COMO CONFIGURAR O GOOGLE SHEETS:
+
+    1. Abra sheets.google.com e crie uma planilha chamada "Zelo — Familiares"
+    2. Na linha 1, crie os cabeçalhos:
+       A1: Timestamp | B1: Nome | C1: Profissional | D1: WhatsApp | E1: Cidade | F1: Condição | G1: Modalidade
+
+    3. No menu superior, clique em Extensões > Apps Script
+    4. Apague o código existente e cole este:
+
+    function doPost(e) {
+      var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+      var dados = JSON.parse(e.postData.contents);
+      sheet.appendRow([
+        dados.timestamp,
+        dados.nome,
+        dados.profissional,
+        dados.whatsapp,
+        dados.cidade,
+        dados.condicao,
+        dados.modalidade
+      ]);
+      return ContentService
+        .createTextOutput(JSON.stringify({ status: 'ok' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    5. Clique em Implantar > Nova implantação
+    6. Tipo: App da Web
+    7. Executar como: Eu
+    8. Quem tem acesso: Qualquer pessoa
+    9. Clique em Implantar e copie a URL gerada
+    10. Cole essa URL no lugar de 'https://script.google.com/macros/s/AKfycbyIqQYanLSXn6ADZRQqhbWTmdPjXXTar86pANOTNH8JRWaz4suLZoKuIkNtpn6NYuQ/exec' no script abaixo
+  </div>
+
+  <script>
+    // ── SCROLL ANIMATIONS ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Dispara hero imediatamente
+    setTimeout(() => {
+      document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 120);
+      });
+    }, 100);
+
+    // ── FORMULÁRIO ──
+    const SCRIPT_URL = 'COLE_AQUI_A_URL_DO_SEU_APPS_SCRIPT';
+
+    async function enviarFormulario(e) {
+      e.preventDefault();
+
+      const nome      = document.getElementById('nome');
+      const profissional = document.getElementById('profissional');
+      const whatsapp  = document.getElementById('whatsapp');
+      const cidade    = document.getElementById('cidade');
+
+      // Validação básica
+      let valido = true;
+      [nome, profissional, whatsapp, cidade].forEach(campo => {
+        if (!campo.value.trim()) {
+          campo.style.borderColor = 'var(--urgency)';
+          valido = false;
+        } else {
+          campo.style.borderColor = '';
+        }
+      });
+
+      if (!valido) {
+        const primeiro = [nome, profissional, whatsapp, cidade].find(c => !c.value.trim());
+        if (primeiro) primeiro.focus();
+        return;
+      }
+
+      const btn = document.getElementById('btn-enviar');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      const dados = {
+        nome:        nome.value.trim(),
+        profissional: profissional.value,
+        whatsapp:    whatsapp.value.trim(),
+        cidade:      cidade.value.trim(),
+        condicao:    document.getElementById('condicao').value || 'Não informado',
+        modalidade:  document.getElementById('modalidade').value || 'Não informado',
+        timestamp:   new Date().toLocaleString('pt-BR')
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados)
+        });
+        mostrarSucesso();
+      } catch (err) {
+        btn.textContent = 'Quero ser contactado pela Zelo →';
+        btn.disabled = false;
+        alert('Erro ao enviar. Por favor, tente novamente.');
+      }
+    }
+
+    function mostrarSucesso() {
+      document.getElementById('formulario').innerHTML = `
+        <div style="text-align:center;padding:48px 20px">
+          <div style="
+            width:64px;height:64px;
+            background:var(--teal-50);
+            border-radius:50%;
+            display:flex;align-items:center;justify-content:center;
+            font-size:28px;
+            margin:0 auto 20px;
+          ">✓</div>
+          <h3 style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--teal-600);margin-bottom:12px;letter-spacing:-0.3px;">
+            Recebemos seu contato!
+          </h3>
+          <p style="color:var(--gray-600);font-size:15px;line-height:1.7;font-weight:300;max-width:380px;margin:0 auto;">
+            Nossa equipe vai entrar em contato pelo WhatsApp em até 24 horas com os profissionais mais indicados para o seu caso.<br><br>
+            <strong style="color:var(--gray-900);font-weight:500;">A recuperação do seu familiar começa agora.</strong>
+          </p>
+        </div>
+      `;
+    }
+
+    document.getElementById('formulario').addEventListener('submit', enviarFormulario);
+
+    // Remove borda de erro ao digitar
+    document.querySelectorAll('input, select').forEach(el => {
+      el.addEventListener('input', () => {
+        el.style.borderColor = '';
+      });
+    });
+  </script>
+</body>
+</html>
